@@ -22,7 +22,7 @@ GLOBALS
 - NONE
 
 CONSTANTS
-- NONE
+- U16_COUNTER_PERIOD_MS (u16)500
 
 TYPES
 - NONE
@@ -92,6 +92,7 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
+  HEARTBEAT_OFF();
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -140,7 +141,24 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
+    static u16 u16Counter = 0;
+    static bool bLightIsOn = FALSE;
     
+    //function runs every 1ms, therefore interate the u16Counter by 1 every time
+    u16Counter++;
+    
+    //check if U16_COUNTER_PERIOD_MS has passed, if so, reset the u16Counter to 0.
+    if(u16Counter >= U16_COUNTER_PERIOD_MS){
+      u16Counter = 0;
+      //change heartbeat state
+      if(bLightIsOn){
+        HEARTBEAT_OFF();
+      }
+      else{
+        HEARTBEAT_ON();
+      }
+      bLightIsOn = !bLightIsOn;
+    }
 } /* end UserApp1SM_Idle() */
      
 
