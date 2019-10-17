@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <settings>
     <Stack>
         <FillEnabled>0</FillEnabled>
@@ -15,7 +15,9 @@
         <Checksum>3040324032</Checksum>
     </DebugChecksum>
     <CodeCoverage>
-        <Enabled>_ 0</Enabled>
+        <Enabled>0</Enabled>
+        <ShowSource>0</ShowSource>
+        <HideCovered>0</HideCovered>
     </CodeCoverage>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -25,6 +27,7 @@
         <ShowArgs>0</ShowArgs>
     </CallStack>
     <Disassembly>
+        <InstrCount>0</InstrCount>
         <MixedMode>1</MixedMode>
     </Disassembly>
     <JLinkDriver>
@@ -69,6 +72,10 @@
         <regBase0>R0 10</regBase0>
         <regBase1>R11 10</regBase1>
     </Registers>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
     <struct_types>
         <Fmt0>ButtonStatusType-u32DebounceTimeStart	3	0</Fmt0>
     </struct_types>
@@ -81,25 +88,20 @@
         <Fmt5>{W}3:u32CurrentButtonLocation	4	0</Fmt5>
         <Fmt6>{W}3:u32GPIOInterruptSources	4	0</Fmt6>
     </watch_formats>
-    <Trace1>
-        <Enabled>0</Enabled>
-        <ShowSource>1</ShowSource>
-    </Trace1>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>1</Mode>
         <Graph>0</Graph>
         <Symbiont>0</Symbiont>
-        <Exclusions />
     </DriverProfiling>
     <CallStackLog>
         <Enabled>0</Enabled>
