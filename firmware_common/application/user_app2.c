@@ -19,7 +19,7 @@ To start a new task using this user_app2 as a template:
 
 ------------------------------------------------------------------------------------------------------------------------
 GLOBALS
-- NONE
+- G_u16UserApp2BtnPressedCounter
 
 CONSTANTS
 - NONE
@@ -38,6 +38,8 @@ PROTECTED FUNCTIONS
 **********************************************************************************************************************/
 
 #include "configuration.h"
+#include "buttons.h"
+#include "utilities.h"
 
 /***********************************************************************************************************************
 Global variable definitions with scope across entire project.
@@ -45,6 +47,7 @@ All Global variable names shall start with "G_<type>UserApp2"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u32 G_u32UserApp2Flags;                          /*!< @brief Global state flags */
+volatile u16 G_u16UserApp2BtnPressedCounter;
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -92,6 +95,7 @@ Promises:
 */
 void UserApp2Initialize(void)
 {
+  G_u16UserApp2BtnPressedCounter = INIT_LED_SPEED;
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -140,7 +144,14 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp2SM_Idle(void)
 {
-    
+    static u16 u16BtnPressCounter = 0;
+    if(IsButtonPressed(PF_TIMING_BTN) && u16BtnPressCounter < 65535){
+      u16BtnPressCounter++;
+    }
+    else if(u16BtnPressCounter > 0){
+      G_u16UserApp2BtnPressedCounter = u16BtnPressCounter;
+      u16BtnPressCounter = 0;
+    }
 } /* end UserApp2SM_Idle() */
      
 

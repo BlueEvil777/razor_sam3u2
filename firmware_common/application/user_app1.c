@@ -38,6 +38,7 @@ PROTECTED FUNCTIONS
 **********************************************************************************************************************/
 
 #include "configuration.h"
+#include "leds.h"
 
 /***********************************************************************************************************************
 Global variable definitions with scope across entire project.
@@ -53,6 +54,7 @@ extern volatile u32 G_u32SystemTime1ms;                   /*!< @brief From main.
 extern volatile u32 G_u32SystemTime1s;                    /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;                     /*!< @brief From main.c */
 extern volatile u32 G_u32ApplicationFlags;                /*!< @brief From main.c */
+extern volatile u16 G_u16UserApp2BtnPressedCounter;
 
 
 /***********************************************************************************************************************
@@ -141,6 +143,26 @@ State Machine Function Definitions
 static void UserApp1SM_Idle(void)
 {
     
+  static u16 u16LedCounterInMs = 0;
+  static LedNameType pfLed = WHITE;
+  static bool bLedIsOn = FALSE;
+  
+  u16LedCounterInMs++;
+  
+  if(pfLed > RED){
+        pfLed = WHITE;
+  }
+  if(u16LedCounterInMs >= G_u16UserApp2BtnPressedCounter){
+    u16LedCounterInMs = 0;
+    if(bLedIsOn){
+      LedOff(pfLed);
+      pfLed++;
+    }
+    else{
+      LedOn(pfLed);
+    }
+    bLedIsOn = !bLedIsOn;
+  }
 } /* end UserApp1SM_Idle() */
      
 
