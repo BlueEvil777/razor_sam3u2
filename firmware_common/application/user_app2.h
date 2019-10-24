@@ -55,7 +55,8 @@ static void UserApp2SM_Error(void);
 /**********************************************************************************************************************
 Constants / Definitions
 **********************************************************************************************************************/
-#define INIT_LED_SPEED (u16)500
+#define U16_INIT_LED_SPEED (u16)300
+#define U16_MIN_LED_SPEED (u16)22
 #define PF_TIMING_BTN (ButtonNameType)BUTTON0
 
 #endif /* __USER_APP2_H */

@@ -95,7 +95,7 @@ Promises:
 */
 void UserApp2Initialize(void)
 {
-  G_u16UserApp2BtnPressedCounter = INIT_LED_SPEED;
+  G_u16UserApp2BtnPressedCounter = U16_INIT_LED_SPEED;
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -149,7 +149,7 @@ static void UserApp2SM_Idle(void)
       u16BtnPressCounter++;
     }
     else if(u16BtnPressCounter > 0){
-      G_u16UserApp2BtnPressedCounter = u16BtnPressCounter;
+      G_u16UserApp2BtnPressedCounter = u16BtnPressCounter / 2 > U16_MIN_LED_SPEED ? u16BtnPressCounter / 2 : U16_MIN_LED_SPEED;
       u16BtnPressCounter = 0;
     }
 } /* end UserApp2SM_Idle() */
