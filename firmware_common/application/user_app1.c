@@ -159,7 +159,7 @@ static void UserApp1SM_Idle(void)
       pfLed++;
     }
     else{
-      LedOn(pfLed);
+      LedPWM(pfLed, LED_PWM_100 - 2*RED + 2*pfLed);
     }
     bLedIsOn = !bLedIsOn;
   }
