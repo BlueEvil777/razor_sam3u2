@@ -140,7 +140,19 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
+    static u32 u32IsCounter = 0;
+    static u32 u32WasCounter = 0;
     
+    if(IsButtonPressed(BUTTON0))
+    {
+      u32IsCounter++;
+    }
+       
+    if(WasButtonPressed(BUTTON0))
+    {
+      u32WasCounter++;
+      ButtonAcknowledge(BUTTON0);
+    }
 } /* end UserApp1SM_Idle() */
      
 
