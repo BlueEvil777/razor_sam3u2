@@ -53,6 +53,7 @@ extern volatile u32 G_u32SystemTime1ms;                   /*!< @brief From main.
 extern volatile u32 G_u32SystemTime1s;                    /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;                     /*!< @brief From main.c */
 extern volatile u32 G_u32ApplicationFlags;                /*!< @brief From main.c */
+extern volatile u32 G_u32UserApp1ReactionTime;						/*!< @brief From user_app1. */
 
 
 /***********************************************************************************************************************
@@ -140,7 +141,29 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp2SM_Idle(void)
 {
-    
+	if(G_u32UserApp1ReactionTime != 0)
+	{
+		for(LedNameType led = WHITE; led <= RED; LedOff(led++));	//Turn off all leds
+		
+		//turn on leds
+		u32 u32ReactionTimeDecoder = G_u32UserApp1ReactionTime;
+		u16 u16ReactionFactor = 10;
+		for(LedNameType led = WHITE; led <= RED; led++)
+		{
+			if(u32ReactionTimeDecoder >= u16ReactionFactor)
+			{
+				u32ReactionTimeDecoder -= u16ReactionFactor;
+				u32ReactionTimeDecoder * 2;
+				LedOn(led);
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+		G_u32UserApp1ReactionTime = 0;
+	}
 } /* end UserApp2SM_Idle() */
      
 

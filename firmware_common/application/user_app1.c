@@ -45,6 +45,7 @@ All Global variable names shall start with "G_<type>UserApp1"
 ***********************************************************************************************************************/
 /* New variables */
 volatile u32 G_u32UserApp1Flags;                          /*!< @brief Global state flags */
+volatile u32 G_u32UserApp1ReactionTime;
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -96,6 +97,7 @@ void UserApp1Initialize(void)
   if( 1 )
   {
     UserApp1_pfStateMachine = UserApp1SM_Idle;
+		G_u32UserApp1ReactionTime = 0;
   }
   else
   {
@@ -140,19 +142,24 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
-    static u32 u32IsCounter = 0;
-    static u32 u32WasCounter = 0;
-    
-    if(IsButtonPressed(BUTTON0))
-    {
-      u32IsCounter++;
-    }
-       
-    if(WasButtonPressed(BUTTON0))
-    {
-      u32WasCounter++;
-      ButtonAcknowledge(BUTTON0);
-    }
+  	static u32 u32BtnCounter = 0;
+		static bool bBtnCounting = FALSE;
+  
+		if(IsButtonPressed(BUTTON0))
+		{
+			if(!bBtnCounting)
+			{
+				bBtnCounting = TRUE;
+			}
+			u32BtnCounter++;
+		}
+		else if(bBtnCounting)
+		{
+			bBtnCounting = FALSE;
+			G_u32UserApp1ReactionTime = u32BtnCounter;
+			
+			u32BtnCounter = 0;	//Reset counter
+		}
 } /* end UserApp1SM_Idle() */
      
 
