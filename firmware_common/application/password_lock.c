@@ -167,9 +167,11 @@ short checkPassword(ButtonInputBufferType* input, const ButtonInputBufferType* p
 {
 	if(waitingForBtn(BUTTON3))
 	{
-		if(input->u8Size == password->u8Size)
+		u8 u8Size = input->u8Size;
+		input->u8Size = 0;
+		if(u8Size == password->u8Size)
 		{
-			for(int i = 0; i < password->u8Size; i++)
+			for(int i = 0; i < u8Size; i++)
 			{
 				if(input->p_arryBuffer[i] != password->p_arryBuffer[i])
 				{
@@ -181,6 +183,14 @@ short checkPassword(ButtonInputBufferType* input, const ButtonInputBufferType* p
 		return -1;
 	}
 	return 0;
+}
+
+/*!
+@fn void clearLeds(void)
+*/
+void clearLeds(void)
+{
+	for(LedNameType led = WHITE; led <= RED; LedOff(led++));
 }
 
 /**********************************************************************************************************************
@@ -200,13 +210,14 @@ static void PasswordLockSM_Idle(void)
 	if(u32TimeStamp == 0)
 	{
 		u32TimeStamp = G_u32SystemTime1ms;
-		pButtonPassword.u8Size = pButtonPassword.u8Size = U8_MAX_PASSWORD_SIZE;
-		pButtonPassword.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*pButtonInputBuffer.u8Size);
-		pButtonInputBuffer.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*(pButtonInputBuffer.u8Size+1));
+		pButtonPassword.u8Size = U8_DEFAULT_PASSWORD_LENGTH;
+		pButtonPassword.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*U8_MAX_PASSWORD_SIZE);
+		pButtonInputBuffer.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*(U8_MAX_PASSWORD_SIZE+1));
 		for(int i = 0; i < U8_DEFAULT_PASSWORD_LENGTH; i++)
 		{
-			pButtonInputBuffer.p_arryBuffer[i] = P_ARY_DEFAULT_PASSWORD[i];
+			pButtonPassword.p_arryBuffer[i] = P_ARY_DEFAULT_PASSWORD[i];
 		}
+		
 	}
 	
 	if(pCurrentPasswordState == PASSWORD_NOT_READY && G_u32SystemTime1ms - u32TimeStamp >= 2000)
@@ -274,9 +285,11 @@ static void PasswordLockSM_Idle(void)
 			{
 				pButtonPassword.p_arryBuffer[i] = pButtonInputBuffer.p_arryBuffer[i];
 			}
+			pButtonPassword.u8Size = pButtonInputBuffer.u8Size;
 			pButtonInputBuffer.u8Size = 0;
 			bStateInit = TRUE;
 			pCurrentPasswordState = PASSWORD_LOCKED;
+			clearLeds();
 			}
 			
 		}
@@ -288,6 +301,27 @@ static void PasswordLockSM_Idle(void)
 		{
 			LedOn(RED);
 			bStateInit = FALSE;
+		}
+		if(checkPassword(&pButtonInputBuffer, &pButtonPassword) == 1){
+			bStateInit = TRUE;
+			pCurrentPasswordState = PASSWORD_UNLOCKED;
+			clearLeds();
+		}
+	}
+	
+	if(pCurrentPasswordState == PASSWORD_UNLOCKED)
+	{
+		if(bStateInit == TRUE)
+		{
+			bStateInit = FALSE;
+			LedOn(GREEN);
+		}
+		if(waitingForBtn(BUTTON3))
+		{
+			pButtonInputBuffer.u8Size = 0;
+			clearLeds();
+			bStateInit = TRUE;
+			pCurrentPasswordState = PASSWORD_LOCKED;
 		}
 	}
 } /* end PasswordLockSM_Idle() */
