@@ -10,8 +10,23 @@
 Type Definitions
 **********************************************************************************************************************/
 
-typedef enum {PASSWORD_LOCKED, PASSWORD_UNLOCKED, PASSWORD_CHANGE} PasswordStateType;
+/*!
+@enum PasswordStateType
 
+@brief Logical names for the different states of the password authentication.
+*/
+typedef enum {PASSWORD_NOT_READY, PASSWORD_LOCKED, PASSWORD_UNLOCKED, PASSWORD_CHANGE} PasswordStateType;
+
+/*!
+@struct ButtonInputBufferType
+
+@brief Holds a defined sized buffer for input buttons.
+*/
+typedef struct
+{
+	u8 u8Size;
+	ButtonNameType *p_arryBuffer;
+} ButtonInputBufferType;
 /**********************************************************************************************************************
 Function Declarations
 **********************************************************************************************************************/
@@ -32,6 +47,8 @@ void PasswordLockRunActiveState(void);
 /*! @privatesection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
 bool waitingForBtn(ButtonNameType);
+bool updateBtnInputBuffer(ButtonInputBufferType*);
+short checkPassword(ButtonInputBufferType*, const ButtonInputBufferType*);
 
 /***********************************************************************************************************************
 State Machine Declarations
@@ -44,7 +61,9 @@ static void PasswordLockSM_Error(void);
 /**********************************************************************************************************************
 Constants / Definitions
 **********************************************************************************************************************/
-#define P_ARY_DEFAULT_PASSWORD {BUTTON0,BUTTON1,BUTTON2};
+#define P_ARY_DEFAULT_PASSWORD (ButtonNameType[]) {BUTTON0,BUTTON1,BUTTON2}
+#define U8_DEFAULT_PASSWORD_LENGTH (u8) 3
+#define U8_MAX_PASSWORD_SIZE (u8) 10
 
 #endif /* __PASSWORD_LOCK_H */
 

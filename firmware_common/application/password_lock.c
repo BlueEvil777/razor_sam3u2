@@ -11,6 +11,7 @@ CONSTANTS
 
 TYPES
 - PasswordStateType
+- ButtonInputBufferType
 
 PUBLIC FUNCTIONS
 - NONE
@@ -77,20 +78,20 @@ Promises:
 */
 void PasswordLockInitialize(void)
 {
-  /* If good initialization, set state to Idle */
-  if( 1 )
-  {
-    PasswordLock_pfStateMachine = PasswordLockSM_Idle;
-  }
-  else
-  {
-    /* The task isn't properly initialized, so shut it down and don't run */
-    PasswordLock_pfStateMachine = PasswordLockSM_Error;
-  }
-
+	/* If good initialization, set state to Idle */
+	if( 1 )
+	{
+		PasswordLock_pfStateMachine = PasswordLockSM_Idle;
+	}
+	else
+	{
+		/* The task isn't properly initialized, so shut it down and don't run */
+		PasswordLock_pfStateMachine = PasswordLockSM_Error;
+	}
+	
 } /* end PasswordLockInitialize() */
 
-  
+
 /*!----------------------------------------------------------------------------------------------------------------------
 @fn void PasswordLockRunActiveState(void)
 
@@ -108,8 +109,8 @@ Promises:
 */
 void PasswordLockRunActiveState(void)
 {
-  PasswordLock_pfStateMachine();
-
+	PasswordLock_pfStateMachine();
+	
 } /* end PasswordLockRunActiveState */
 
 
@@ -123,8 +124,64 @@ void PasswordLockRunActiveState(void)
 
 @brief Returns the boolean state of a given button. Agknowledges it if TRUE.
 
-Requires:
+Requires: A valid ButtonNameType variable.
+Promises: Return if a given button was pressed. Agknowledges the button if true.
 */
+bool waitingForBtn(ButtonNameType btn)
+{
+	if(WasButtonPressed(btn) == TRUE)
+	{
+		ButtonAcknowledge(btn);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+/*!
+@fn bool updateBtnInputBuffer(ButtonInputBufferType)
+
+@brief updates the buffer of inputted pins.
+
+Adds buttons to input buffer if a password button is pressed. Returns if a button is added.
+*/
+bool updateBtnInputBuffer(ButtonInputBufferType* pBtnInputBuffer)
+{
+	for(ButtonNameType btn = BUTTON0; btn <= BUTTON2; btn++)
+	{
+		if(waitingForBtn(btn))
+		{
+			pBtnInputBuffer->p_arryBuffer[pBtnInputBuffer->u8Size] = btn;
+			pBtnInputBuffer->u8Size++;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+/*!
+@fn short checkPassword(ButtonInputBufferType*, const ButtonInputBufferType*)
+
+@brief ...
+*/
+short checkPassword(ButtonInputBufferType* input, const ButtonInputBufferType* password)
+{
+	if(waitingForBtn(BUTTON3))
+	{
+		if(input->u8Size == password->u8Size)
+		{
+			for(int i = 0; i < password->u8Size; i++)
+			{
+				if(input->p_arryBuffer[i] != password->p_arryBuffer[i])
+				{
+					return -1;
+				}
+			}
+			return 1;
+		}
+		return -1;
+	}
+	return 0;
+}
 
 /**********************************************************************************************************************
 State Machine Function Definitions
@@ -133,20 +190,114 @@ State Machine Function Definitions
 /* What does this state do? */
 static void PasswordLockSM_Idle(void)
 {
-	if(G_u32SystemTime1ms == 2000)
+	static PasswordStateType pCurrentPasswordState = PASSWORD_NOT_READY;
+	static u32 u32TimeStamp = 0;
+	static ButtonInputBufferType pButtonPassword;
+	static ButtonInputBufferType pButtonInputBuffer;
+	static bool bInputOverfill = FALSE;
+	static bool bStateInit = FALSE;
+	
+	if(u32TimeStamp == 0)
+	{
+		u32TimeStamp = G_u32SystemTime1ms;
+		pButtonPassword.u8Size = pButtonPassword.u8Size = U8_MAX_PASSWORD_SIZE;
+		pButtonPassword.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*pButtonInputBuffer.u8Size);
+		pButtonInputBuffer.p_arryBuffer =  malloc(sizeof(ButtonInputBufferType)*(pButtonInputBuffer.u8Size+1));
+		for(int i = 0; i < U8_DEFAULT_PASSWORD_LENGTH; i++)
 		{
-			if(waitingForBtn(BUTTON3)
-			{
-				
+			pButtonInputBuffer.p_arryBuffer[i] = P_ARY_DEFAULT_PASSWORD[i];
 		}
+	}
+	
+	if(pCurrentPasswordState == PASSWORD_NOT_READY && G_u32SystemTime1ms - u32TimeStamp >= 2000)
+	{
+		bStateInit = TRUE;
+		PWMAudioSetFrequency(BUZZER1, 300);
+		if(waitingForBtn(BUTTON3))
+		{
+			//Initaialize for Change State
+			pCurrentPasswordState = PASSWORD_CHANGE;
+			u32TimeStamp = G_u32SystemTime1ms;
+			LedOn(ORANGE);
+		}
+		else
+		{
+			pCurrentPasswordState = PASSWORD_LOCKED;
+		}
+	}
+	
+	//Manages password buttons when PASSWORD_READY
+	if(pCurrentPasswordState != PASSWORD_NOT_READY)
+	{
+		
+		if(bInputOverfill == TRUE && G_u32SystemTime1ms - u32TimeStamp >= 700)
+		{
+			PWMAudioOff(BUZZER1);
+			bInputOverfill = FALSE;
+		}
+		
+		updateBtnInputBuffer(&pButtonInputBuffer);
+		if(pButtonInputBuffer.u8Size > U8_MAX_PASSWORD_SIZE)
+		{
+			pButtonInputBuffer.u8Size = 0;
+			bInputOverfill = TRUE;
+			PWMAudioOn(BUZZER1);
+			u32TimeStamp = G_u32SystemTime1ms;
+		}
+	}
+	
+	if(pCurrentPasswordState == PASSWORD_CHANGE)
+	{
+		//Begin alternating green and red leds
+		if(bStateInit == TRUE && G_u32SystemTime1ms - u32TimeStamp == 1500)
+		{
+			LedOff(ORANGE);
+			LedBlink(GREEN, LED_2HZ);
+		}
+		if(bStateInit && G_u32SystemTime1ms - u32TimeStamp == 1750)
+		{
+			LedBlink(RED, LED_2HZ);
+			bStateInit = FALSE;
+		}
+		
+		if(waitingForBtn(BUTTON3))
+		{
+			if(pButtonInputBuffer.u8Size == 0)
+			{
+				bInputOverfill = TRUE;
+				PWMAudioOn(BUZZER1);
+				u32TimeStamp = G_u32SystemTime1ms;
+			}
+			else
+			{
+			for(int i = 0; i < pButtonInputBuffer.u8Size; i++)
+			{
+				pButtonPassword.p_arryBuffer[i] = pButtonInputBuffer.p_arryBuffer[i];
+			}
+			pButtonInputBuffer.u8Size = 0;
+			bStateInit = TRUE;
+			pCurrentPasswordState = PASSWORD_LOCKED;
+			}
+			
+		}
+	}
+	
+	if(pCurrentPasswordState == PASSWORD_LOCKED)
+	{
+		if(bStateInit == TRUE)
+		{
+			LedOn(RED);
+			bStateInit = FALSE;
+		}
+	}
 } /* end PasswordLockSM_Idle() */
-     
+
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
 static void PasswordLockSM_Error(void)          
 {
-  
+	
 } /* end PasswordLockSM_Error() */
 
 

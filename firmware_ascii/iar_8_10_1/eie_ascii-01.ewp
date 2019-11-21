@@ -2276,7 +2276,7 @@
                 <name>$PROJ_DIR$\..\..\firmware_common\application\music.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\user_app1.h</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\firmware_common\application\user_app2.h</name>
@@ -2294,7 +2294,7 @@
                 <name>$PROJ_DIR$\..\..\firmware_common\application\main.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\user_app1.c</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\firmware_common\application\user_app2.c</name>

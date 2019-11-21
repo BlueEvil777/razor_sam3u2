@@ -88,7 +88,7 @@ void main(void)
 #endif /* EIE_DOTMATRIX */
  
   /* Application initialization */
-  UserApp1Initialize();
+  PasswordLockInitialize();
   UserApp2Initialize();
   UserApp3Initialize();
 
@@ -127,7 +127,7 @@ void main(void)
 #endif /* EIE_DOTMATRIX */
 
     /* Applications */
-    UserApp1RunActiveState();
+    PasswordLockRunActiveState();
     UserApp2RunActiveState();
     UserApp3RunActiveState();
         
