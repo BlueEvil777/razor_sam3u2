@@ -1,27 +1,27 @@
 /*!*********************************************************************************************************************
-@file user_app2.h                                                                
-@brief Header file for user_app2
-
-----------------------------------------------------------------------------------------------------------------------
-To start a new task using this user_app2 as a template:
-1. Follow the instructions at the top of user_app2.c
-2. Use ctrl-h to find and replace all instances of "user_app2" with "yournewtaskname"
-3. Use ctrl-h to find and replace all instances of "UserApp2" with "YourNewTaskName"
-4. Use ctrl-h to find and replace all instances of "USER_APP2" with "YOUR_NEW_TASK_NAME"
-5. Add #include yournewtaskname.h" to configuration.h
-6. Add/update any special configurations required in configuration.h (e.g. peripheral assignment and setup values)
-7. Delete this text (between the dashed lines)
-----------------------------------------------------------------------------------------------------------------------
+@file output_manager.h                                                                
+@brief Header file for output_manager
 
 **********************************************************************************************************************/
 
-#ifndef __USER_APP2_H
-#define __USER_APP2_H
+#ifndef __OUTPUT_MANAGER_H
+#define __OUTPUT_MANAGER_H
+#include <configuration.h>
+#include <eief1-pcb-01.h>
 
 /**********************************************************************************************************************
 Type Definitions
 **********************************************************************************************************************/
 
+/*!
+@enum LedOutputStateType
+*/
+typedef enum {LED_OUTPUT_NONE = 0, LED_OUTPUT_RED, LED_OUTPUT_GREEN, LED_OUTPUT_RGFLASH}LedOutputStateType;
+
+/*!
+@enum LedOutputAlertType
+ */
+ typedef enum {LED_ALERT_ORANGE = 0, LED_ALERT_REDFLASH, LED_ALERT_ORANGEFLASH};
 
 /**********************************************************************************************************************
 Function Declarations
@@ -35,8 +35,8 @@ Function Declarations
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
-void UserApp2Initialize(void);
-void UserApp2RunActiveState(void);
+void OutputManagerInitialize(void);
+void OutputManagerRunActiveState(void);
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
@@ -47,8 +47,8 @@ void UserApp2RunActiveState(void);
 /***********************************************************************************************************************
 State Machine Declarations
 ***********************************************************************************************************************/
-static void UserApp2SM_Idle(void);    
-static void UserApp2SM_Error(void);         
+static void OutputManagerSM_Idle(void);    
+static void OutputManagerSM_Error(void);         
 
 
 
@@ -57,7 +57,7 @@ Constants / Definitions
 **********************************************************************************************************************/
 
 
-#endif /* __USER_APP2_H */
+#endif /* __OUTPUT_MANAGER_H */
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* End of File                                                                                                        */
 /*--------------------------------------------------------------------------------------------------------------------*/

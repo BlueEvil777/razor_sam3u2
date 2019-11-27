@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Rasor_Sam3u2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Rasor_Sam3u2">
+				<Option output="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Rasor_Sam3u2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/bsp"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/drivers"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/cmsis"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Rasor_Sam3u2"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Rasor_Sam3u2/fast">
+				<Option output="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Rasor_Sam3u2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/bsp"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/drivers"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/cmsis"/>
+					<Add directory="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Rasor_Sam3u2/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/bsp/eief1-pcb-01.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/bsp/eief1-pcb-01.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/drivers/lcd_nhd-c0220biz.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_ascii/drivers/lcd_nhd-c0220biz.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/debug.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/debug.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/main.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/main.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/music.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/output_manager.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/output_manager.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/password_lock.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/password_lock.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/user_app3.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/application/user_app3.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp/AT91SAM3U4.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp/board_cstartup_iar.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp/configuration.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/bsp/typedefs.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/cmsis/core_cm3.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/adc12.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/adc12.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/ant.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/ant.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/ant_api.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/ant_api.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/antdefines.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/antmessage.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/buttons.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/buttons.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/exceptions.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/exceptions.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/interrupts.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/interrupts.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/leds.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/leds.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/messaging.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/messaging.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_i2c.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_i2c.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_spi.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_spi.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_ssp.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_ssp.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_uart.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/sam3u_uart.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/timer.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/timer.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/utilities.c">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/firmware_common/drivers/utilities.h">
+			<Option target="Rasor_Sam3u2"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

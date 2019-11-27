@@ -11,7 +11,7 @@ Bookmarks:
 ##### UART peripheral board-specific parameters
 $$$$$ SPI peripheral board-specific parameters
 %%%%% SSP peripheral board-specific parameters
-^^^^^ I²C peripheral board-specific parameters
+^^^^^ Iï¿½C peripheral board-specific parameters
 
 
 ***********************************************************************************************************************/
@@ -94,7 +94,7 @@ Includes
 #include "debug.h"
 #include "music.h"
 #include "password_lock.h"
-#include "user_app2.h"
+#include "output_manager.h"
 #include "user_app3.h"
 
 
@@ -1201,12 +1201,12 @@ or 2MHz, so no issues.
 
 /*! @endcond */
 /***********************************************************************************************************************
-^^^^^ I²C (TWI) peripheral board-specific parameters
+^^^^^ Iï¿½C (TWI) peripheral board-specific parameters
 ***********************************************************************************************************************/
 /*! @cond DOXYGEN_EXCLUDE */
 
 /*----------------------------------------------------------------------------------------------------------------------
-I²C Master mode for EiE development board (TWI0)
+Iï¿½C Master mode for EiE development board (TWI0)
 ASCII: LCD and Blade
 Dot Matrix: Blade and R01 EIE_DOTMATRIX accelerometer
 */

@@ -2276,10 +2276,10 @@
                 <name>$PROJ_DIR$\..\..\firmware_common\application\music.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.h</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\output_manager.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\user_app2.h</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\firmware_common\application\user_app3.h</name>
@@ -2294,10 +2294,10 @@
                 <name>$PROJ_DIR$\..\..\firmware_common\application\main.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.c</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\output_manager.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_common\application\user_app2.c</name>
+                <name>$PROJ_DIR$\..\..\firmware_common\application\password_lock.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\firmware_common\application\user_app3.c</name>
