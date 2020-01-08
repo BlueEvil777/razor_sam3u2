@@ -12,7 +12,7 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <DebugChecksum>
-        <Checksum>2641003157</Checksum>
+        <Checksum>1402559382</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>0</Enabled>
@@ -89,6 +89,12 @@
         <Fmt6>{W}3:u32CurrentButtonLocation	4	0</Fmt6>
         <Fmt7>{W}3:u32GPIOInterruptSources	4	0</Fmt7>
     </watch_formats>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -98,6 +104,10 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
+    <Aliases>
+        <Count>0</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>1</Mode>
@@ -110,14 +120,4 @@
     <CallStackStripe>
         <ShowTiming>1</ShowTiming>
     </CallStackStripe>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Count>0</Count>
-    </Breakpoints2>
-    <Aliases>
-        <Count>0</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
 </settings>

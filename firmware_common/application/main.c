@@ -3,7 +3,7 @@
 @brief Main system file for the EiE firmware.  
 ***********************************************************************************************************************/
 
-#include "configuration.h"
+#include <configuration.h>
 
 extern	void kill_x_cycles(u32);
 
@@ -89,7 +89,7 @@ void main(void)
  
   /* Application initialization */
   PasswordLockInitialize();
-  UserApp2Initialize();
+  OutputManagerInitialize();
   UserApp3Initialize();
 
   /* Exit initialization */
@@ -128,7 +128,7 @@ void main(void)
 
     /* Applications */
     PasswordLockRunActiveState();
-    UserApp2RunActiveState();
+    OutputManagerRunActiveState();
     UserApp3RunActiveState();
         
     /* System sleep */

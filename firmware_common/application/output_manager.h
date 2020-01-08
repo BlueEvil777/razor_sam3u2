@@ -21,7 +21,17 @@ typedef enum {LED_OUTPUT_NONE = 0, LED_OUTPUT_RED, LED_OUTPUT_GREEN, LED_OUTPUT_
 /*!
 @enum LedOutputAlertType
  */
- typedef enum {LED_ALERT_ORANGE = 0, LED_ALERT_REDFLASH, LED_ALERT_ORANGEFLASH};
+ typedef enum {LED_ALERT_NONE = 0, LED_ALERT_ORANGE, LED_ALERT_REDFLASH, LED_ALERT_ORANGEFLASH}LedOutputAlertType;
+
+ /*!
+  @struct BlinkSequenceType
+  */
+  typedef struct{
+      LedNameType* pSequence;
+      u8 u8SequenceLength, u8Repetitions;
+      u32 u32SwitchingTime;
+      bool bInitialized;
+  } BlinkSequenceType;
 
 /**********************************************************************************************************************
 Function Declarations
@@ -31,6 +41,10 @@ Function Declarations
 /*! @publicsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+/*!
+@fn OutputManagerSwitchOutputState(LedOutputStateType pNewState)
+*/
+ void OutputManagerSwitchOutputState(LedOutputStateType pNewState);
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
@@ -44,18 +58,23 @@ void OutputManagerRunActiveState(void);
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 
+static void clearLeds(void);
+static void deleteSequence(void);
+
 /***********************************************************************************************************************
 State Machine Declarations
 ***********************************************************************************************************************/
-static void OutputManagerSM_Idle(void);    
-static void OutputManagerSM_Error(void);         
+static void OutputManagerSM_Idle(void);
+static void OutputManagerSM_Error(void);
+
+static void OutputManagerSM_LedSequence(void);
 
 
 
 /**********************************************************************************************************************
 Constants / Definitions
 **********************************************************************************************************************/
-
+#define CONTINUOUS_SEQUENCE (u8) 255
 
 #endif /* __OUTPUT_MANAGER_H */
 /*--------------------------------------------------------------------------------------------------------------------*/

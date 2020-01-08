@@ -1,50 +1,36 @@
 /*!*********************************************************************************************************************
-@file user_app2.c                                                                
+@file output_manager.c                                                                
 @brief User's tasks / applications are written here.  This description
 should be replaced by something specific to the task.
-
-----------------------------------------------------------------------------------------------------------------------
-To start a new task using this user_app2 as a template:
- 1. Copy both user_app2.c and user_app2.h to the Application directory
- 2. Rename the files yournewtaskname.c and yournewtaskname.h
- 3. Add yournewtaskname.c and yournewtaskname.h to the Application Include and Source groups in the IAR project
- 4. Use ctrl-h (make sure "Match Case" is checked) to find and replace all instances of "user_app2" with "yournewtaskname"
- 5. Use ctrl-h to find and replace all instances of "UserApp2" with "YourNewTaskName"
- 6. Use ctrl-h to find and replace all instances of "USER_APP1" with "YOUR_NEW_TASK_NAME"
- 7. Add a call to YourNewTaskNameInitialize() in the init section of main
- 8. Add a call to YourNewTaskNameRunActiveState() in the Super Loop section of main
- 9. Update yournewtaskname.h per the instructions at the top of yournewtaskname.h
-10. Delete this text (between the dashed lines) and update the Description below to describe your task
-----------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------
 GLOBALS
 - NONE
 
 CONSTANTS
-- NONE
+- CONTINUOUS_SEQUENCE
 
 TYPES
 - NONE
 
 PUBLIC FUNCTIONS
-- NONE
+- void OutputManagerSwitchOutputState(LedOutputStateType eNewState)
 
 PROTECTED FUNCTIONS
-- void UserApp2Initialize(void)
-- void UserApp2RunActiveState(void)
+- void OutputManagerInitialize(void)
+- void OutputManagerRunActiveState(void)
 
 
 **********************************************************************************************************************/
 
-#include "configuration.h"
+#include <configuration.h>
 
 /***********************************************************************************************************************
 Global variable definitions with scope across entire project.
-All Global variable names shall start with "G_<type>UserApp2"
+All Global variable names shall start with "G_<type>OutputManager"
 ***********************************************************************************************************************/
 /* New variables */
-volatile u32 G_u32UserApp2Flags;                          /*!< @brief Global state flags */
+volatile u32 G_u32OutputManagerFlags;                          /*!< @brief Global state flags */
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -57,10 +43,11 @@ extern volatile u32 G_u32ApplicationFlags;                /*!< @brief From main.
 
 /***********************************************************************************************************************
 Global variable definitions with scope limited to this local application.
-Variable names shall start with "UserApp2_<type>" and be declared as static.
+Variable names shall start with "OutputManager_<type>" and be declared as static.
 ***********************************************************************************************************************/
-static fnCode_type UserApp2_pfStateMachine;               /*!< @brief The state machine function pointer */
-//static u32 UserApp2_u32Timeout;                           /*!< @brief Timeout counter used across states */
+static fnCode_type OutputManager_pfStateMachine;               /*!< @brief The state machine function pointer */
+static BlinkSequenceType OutputManager_pBlinkLed;              /*!< @brief blink sequence of leds  */
+static LedOutputAlertType OutputManager_pLedActiveAlert;       /*!< @brief active alert */
 
 
 /**********************************************************************************************************************
@@ -71,12 +58,48 @@ Function Definitions
 /*! @publicsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+void OutputManagerSwitchOutputState(LedOutputStateType eNewState)
+{
+    clearLeds();
+    if(OutputManager_pBlinkLed.pSequence != NULL)
+		{
+			deleteSequence();
+		}
+		
+    switch(eNewState)
+    {
+        case LED_OUTPUT_NONE:
+            OutputManager_pfStateMachine = OutputManagerSM_Idle;
+            break;
+        case LED_OUTPUT_GREEN:
+            LedOn(GREEN);
+            OutputManager_pfStateMachine = OutputManagerSM_Idle;
+            break;
+        case LED_OUTPUT_RED:
+            LedOn(RED);
+            OutputManager_pfStateMachine = OutputManagerSM_Idle;
+            break;
+        case LED_OUTPUT_RGFLASH:
+            {
+                LedNameType* pSequence = malloc(sizeof(LedNameType) * 2);
+                pSequence[0] = RED;
+                pSequence[1] = GREEN;
+            	OutputManager_pBlinkLed = (BlinkSequenceType) {.u8SequenceLength = 2, .u32SwitchingTime = 150, .pSequence = pSequence, .u8Repetitions = CONTINUOUS_SEQUENCE};
+                OutputManager_pfStateMachine = OutputManagerSM_LedSequence;
+            	break;
+            }
+        default:
+            //DebugPrintf("No Output State!");
+            exit(1);
+    }
+}
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 /*!--------------------------------------------------------------------------------------------------------------------
-@fn void UserApp2Initialize(void)
+@fn void OutputManagerInitialize(void)
 
 @brief
 Initializes the State Machine and its variables.
@@ -90,24 +113,25 @@ Promises:
 - NONE
 
 */
-void UserApp2Initialize(void)
+void OutputManagerInitialize(void)
 {
   /* If good initialization, set state to Idle */
   if( 1 )
   {
-    UserApp2_pfStateMachine = UserApp2SM_Idle;
+    OutputManager_pfStateMachine = OutputManagerSM_Idle;
+    OutputManager_pBlinkLed = (BlinkSequenceType) {0};
   }
   else
   {
     /* The task isn't properly initialized, so shut it down and don't run */
-    UserApp2_pfStateMachine = UserApp2SM_Error;
+    OutputManager_pfStateMachine = OutputManagerSM_Error;
   }
 
-} /* end UserApp2Initialize() */
+} /* end OutputManagerInitialize() */
 
   
 /*!----------------------------------------------------------------------------------------------------------------------
-@fn void UserApp2RunActiveState(void)
+@fn void OutputManagerRunActiveState(void)
 
 @brief Selects and runs one iteration of the current state in the state machine.
 
@@ -121,35 +145,89 @@ Promises:
 - Calls the function to pointed by the state machine function pointer
 
 */
-void UserApp2RunActiveState(void)
+void OutputManagerRunActiveState(void)
 {
-  UserApp2_pfStateMachine();
+  OutputManager_pfStateMachine();
 
-} /* end UserApp2RunActiveState */
+} /* end OutputManagerRunActiveState */
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @privatesection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+static void clearLeds(void)
+{
+		int i = 0;
+    for(LedNameType eLed = WHITE; eLed <= RED; LedOff(eLed++));
+}
+
+static void deleteSequence(void)
+{
+	if(OutputManager_pBlinkLed.pSequence != NULL)
+	{
+		DebugPrintf("Led Sequence Does Not Exist!\n");
+		return;
+	}
+	free(OutputManager_pBlinkLed.pSequence);
+	OutputManager_pBlinkLed.pSequence = NULL;
+}
 
 /**********************************************************************************************************************
 State Machine Function Definitions
 **********************************************************************************************************************/
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* What does this state do? */
-static void UserApp2SM_Idle(void)
+static void OutputManagerSM_Idle(void)
 {
     
-} /* end UserApp2SM_Idle() */
-     
+} /* end OutputManagerSM_Idle() */
+
+ static void OutputManagerSM_LedSequence(void)
+ {
+    static u32 u32SequenceTimer;
+    static u8 u8SequenceCursor;
+
+    //detect new sequence
+    if(OutputManager_pBlinkLed.bInitialized == FALSE)
+    {
+        u32SequenceTimer = G_u32SystemTime1ms;
+        clearLeds();
+        LedOn(OutputManager_pBlinkLed.pSequence[u8SequenceCursor]);
+        OutputManager_pBlinkLed.bInitialized = TRUE;
+    }
+
+    //run sequence
+    if(G_u32SystemTime1ms - u32SequenceTimer >= OutputManager_pBlinkLed.u32SwitchingTime)
+    {
+        LedOff(OutputManager_pBlinkLed.pSequence[u8SequenceCursor++]);
+        //check for end of sequence
+        if(u8SequenceCursor == OutputManager_pBlinkLed.u8SequenceLength)
+        {
+            //check for end of repetitions
+            if(OutputManager_pBlinkLed.u8Repetitions == 0)
+            {
+                OutputManagerSwitchOutputState(LED_OUTPUT_NONE);
+                return;
+            }
+            else if(OutputManager_pBlinkLed.u8Repetitions != CONTINUOUS_SEQUENCE)
+            {
+                OutputManager_pBlinkLed.u8Repetitions--;
+            }
+
+            u8SequenceCursor = 0;
+        }
+        LedOn(OutputManager_pBlinkLed.pSequence[u8SequenceCursor]);
+        u32SequenceTimer = G_u32SystemTime1ms;
+    }
+ }
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
-static void UserApp2SM_Error(void)          
+static void OutputManagerSM_Error(void)          
 {
   
-} /* end UserApp2SM_Error() */
+} /* end OutputManagerSM_Error() */
 
 
 

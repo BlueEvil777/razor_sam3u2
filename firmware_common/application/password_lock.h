@@ -52,7 +52,7 @@ void PasswordLockRunActiveState(void);
 bool waitingForBtn(ButtonNameType);
 bool updateBtnInputBuffer(ButtonInputBufferType*);
 short checkPassword(ButtonInputBufferType*, const ButtonInputBufferType*);
-void clearLeds(void);
+static void clearLeds(void);
 
 /***********************************************************************************************************************
 State Machine Declarations

@@ -79,7 +79,7 @@ Promises:
 void PasswordLockInitialize(void)
 {
 	/* If good initialization, set state to Idle */
-	if( 1 )
+	if( 0 )
 	{
 		PasswordLock_pfStateMachine = PasswordLockSM_Idle;
 	}
@@ -188,7 +188,7 @@ short checkPassword(ButtonInputBufferType* input, const ButtonInputBufferType* p
 /*!
 @fn void clearLeds(void)
 */
-void clearLeds(void)
+static void clearLeds(void)
 {
 	for(LedNameType led = WHITE; led <= RED; LedOff(led++));
 }
@@ -331,7 +331,12 @@ static void PasswordLockSM_Idle(void)
 /* Handle an error */
 static void PasswordLockSM_Error(void)          
 {
-	
+	static bool bInitializeError = TRUE;
+	if(bInitializeError == TRUE)
+	{
+		OutputManagerSwitchOutputState(LED_OUTPUT_RGFLASH);
+		bInitializeError = FALSE;
+	}
 } /* end PasswordLockSM_Error() */
 
 

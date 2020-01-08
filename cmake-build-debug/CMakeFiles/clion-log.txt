@@ -1,4 +1,4 @@
-C:\Users\TEMP\.CLion2019.2\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2
+C:\Users\TEMP\.CLion2019.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/TEMP/Documents/EIE/Rasor_Sam3u2
 -- The C compiler identification is GNU 7.4.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
