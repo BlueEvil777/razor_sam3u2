@@ -12,7 +12,7 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <DebugChecksum>
-        <Checksum>1402559382</Checksum>
+        <Checksum>1840727607</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>0</Enabled>
@@ -84,17 +84,13 @@
         <Fmt1>{W}1:PIOB_PSR	4	0</Fmt1>
         <Fmt2>{W}3:G_u32SystemFlags	4	0</Fmt2>
         <Fmt3>{W}3:G_u32SystemTime1ms	3	0</Fmt3>
-        <Fmt4>{W}3:pButtonInputBuffer.u8Size	3	0</Fmt4>
-        <Fmt5>{W}3:u32ButtonInterrupts	4	0</Fmt5>
-        <Fmt6>{W}3:u32CurrentButtonLocation	4	0</Fmt6>
-        <Fmt7>{W}3:u32GPIOInterruptSources	4	0</Fmt7>
+        <Fmt4>{W}3:OutputManager_pBlinkLed.pSequence[u8SequenceCursor]	3	0</Fmt4>
+        <Fmt5>{W}3:heldSequence.pSequence	3	0</Fmt5>
+        <Fmt6>{W}3:pButtonInputBuffer.u8Size	3	0</Fmt6>
+        <Fmt7>{W}3:u32ButtonInterrupts	4	0</Fmt7>
+        <Fmt8>{W}3:u32CurrentButtonLocation	4	0</Fmt8>
+        <Fmt9>{W}3:u32GPIOInterruptSources	4	0</Fmt9>
     </watch_formats>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Count>0</Count>
-    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -104,10 +100,6 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <Aliases>
-        <Count>0</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>1</Mode>
@@ -120,4 +112,21 @@
     <CallStackStripe>
         <ShowTiming>1</ShowTiming>
     </CallStackStripe>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.292.17" 0 0 1 "" 0 "" 0</Bp0>
+        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.111.13" 0 0 1 "" 0 "" 0</Bp1>
+        <Bp2>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.260.5" 0 0 1 "" 0 "" 0</Bp2>
+        <Bp3>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.267.9" 0 0 1 "" 0 "" 0</Bp3>
+        <Bp4>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.223.5" 0 0 1 "" 0 "" 0</Bp4>
+        <Bp5>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.223.13" 0 0 1 "" 0 "" 0</Bp5>
+        <Bp6>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\firmware_common\application\output_manager.c}.223.5" 0 0 1 "" 0 "" 0</Bp6>
+        <Count>7</Count>
+    </Breakpoints2>
+    <Aliases>
+        <Count>0</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
 </settings>

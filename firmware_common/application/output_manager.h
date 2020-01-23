@@ -20,6 +20,8 @@ typedef enum {LED_OUTPUT_NONE = 0, LED_OUTPUT_RED, LED_OUTPUT_GREEN, LED_OUTPUT_
 
 /*!
 @enum LedOutputAlertType
+
+ None is 0, orange is the last solid, flashes come after orange.
  */
  typedef enum {LED_ALERT_NONE = 0, LED_ALERT_ORANGE, LED_ALERT_REDFLASH, LED_ALERT_ORANGEFLASH}LedOutputAlertType;
 
@@ -46,6 +48,12 @@ Function Declarations
 */
  void OutputManagerSwitchOutputState(LedOutputStateType pNewState);
 
+ /*!
+  * @fn void OutputManagerSetAlert(LedOutputAlertType ledAlert)
+  * @param ledAlert
+  */
+void OutputManagerSetAlert(LedOutputAlertType ledAlert);
+
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -60,6 +68,7 @@ void OutputManagerRunActiveState(void);
 
 static void clearLeds(void);
 static void deleteSequence(void);
+static bool holdState(bool resume);
 
 /***********************************************************************************************************************
 State Machine Declarations
@@ -67,14 +76,23 @@ State Machine Declarations
 static void OutputManagerSM_Idle(void);
 static void OutputManagerSM_Error(void);
 
+static void OutputManagerSM_Hold(void){}
 static void OutputManagerSM_LedSequence(void);
 
+
+/***********************************************************************************************************************
+Pre-Action Declarations
+***********************************************************************************************************************/
+
+static void OutputManagerPA_LedAlert(void);
 
 
 /**********************************************************************************************************************
 Constants / Definitions
 **********************************************************************************************************************/
 #define CONTINUOUS_SEQUENCE (u8) 255
+#define ALERT_DURATION (u32) 1000
+#define BLINK_DURATION (u32) ALERT_DURATION / 5;
 
 #endif /* __OUTPUT_MANAGER_H */
 /*--------------------------------------------------------------------------------------------------------------------*/

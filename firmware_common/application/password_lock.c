@@ -82,6 +82,7 @@ void PasswordLockInitialize(void)
 	if( 0 )
 	{
 		PasswordLock_pfStateMachine = PasswordLockSM_Idle;
+		DebugPrintf("PasswordLock Initialized\n");
 	}
 	else
 	{
@@ -334,9 +335,21 @@ static void PasswordLockSM_Error(void)
 	static bool bInitializeError = TRUE;
 	if(bInitializeError == TRUE)
 	{
-		OutputManagerSwitchOutputState(LED_OUTPUT_RGFLASH);
+		OutputManagerSwitchOutputState(LED_OUTPUT_GREEN);
 		bInitializeError = FALSE;
 	}
+	if(G_u32SystemTime1ms == 4000)
+    {
+	    OutputManagerSetAlert(LED_ALERT_ORANGE);
+    }
+	if(G_u32SystemTime1ms == 6000)
+    {
+	    OutputManagerSwitchOutputState(LED_OUTPUT_RED);
+    }
+	if(G_u32SystemTime1ms == 8000)
+    {
+	    OutputManagerSetAlert(LED_ALERT_REDFLASH);
+    }
 } /* end PasswordLockSM_Error() */
 
 
