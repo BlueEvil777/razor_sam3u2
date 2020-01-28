@@ -24,6 +24,7 @@ PROTECTED FUNCTIONS
 **********************************************************************************************************************/
 
 #include <configuration.h>
+#include <output_manager.h>
 
 /***********************************************************************************************************************
 Global variable definitions with scope across entire project.
@@ -48,7 +49,6 @@ Variable names shall start with "OutputManager_<type>" and be declared as static
 static fnCode_type OutputManager_pfStateMachine;               /*!< @brief The state machine function pointer */
 static fnCode_type OutputManager_pfPreAction;                  /*< @brief A pre-action before resuming the state */
 static BlinkSequenceType OutputManager_pBlinkLed;              /*!< @brief blink sequence of leds  */
-static LedOutputAlertType OutputManager_pLedActiveAlert;       /*!< @brief active alert */
 
 
 /**********************************************************************************************************************
@@ -56,84 +56,79 @@ Function Definitions
 **********************************************************************************************************************/
 
 /*--------------------------------------------------------------------------------------------------------------------*/
-/*! @publicsection */                                                                                            
+/*! @publicsection */
 /*--------------------------------------------------------------------------------------------------------------------*/
 
-void OutputManagerSwitchOutputState(LedOutputStateType eNewState)
-{
+void OutputManagerSwitchOutputState(LedOutputStateType eNewState) {
     clearLeds();
-    if(OutputManager_pBlinkLed.pSequence != NULL)
-		{
-			deleteSequence();
-		}
-		
-    switch(eNewState)
-    {
+    if (OutputManager_pBlinkLed.pSequence != NULL) {
+        deleteSequence();
+    }
+
+    switch (eNewState) {
         case LED_OUTPUT_NONE:
             OutputManager_pfStateMachine = OutputManagerSM_Idle;
             break;
         case LED_OUTPUT_GREEN:
             LedOn(GREEN);
-						OutputManager_pBlinkLed.pSequence = (void*)GREEN;
+            OutputManager_pBlinkLed.pSequence = (void *) GREEN;
             OutputManager_pfStateMachine = OutputManagerSM_Idle;
             break;
         case LED_OUTPUT_RED:
             LedOn(RED);
-						OutputManager_pBlinkLed.pSequence = (void*)RED;
+            OutputManager_pBlinkLed.pSequence = (void *) RED;
             OutputManager_pfStateMachine = OutputManagerSM_Idle;
             break;
-        case LED_OUTPUT_RGFLASH:
-            {
-                LedNameType* pSequence = malloc(sizeof(LedNameType) * 2);
-                pSequence[0] = RED;
-                pSequence[1] = GREEN;
-            	OutputManager_pBlinkLed = (BlinkSequenceType) {.u8SequenceLength = 2, .u32SwitchingTime = 150, .pSequence = pSequence, .u8Repetitions = CONTINUOUS_SEQUENCE};
-                OutputManager_pfStateMachine = OutputManagerSM_LedSequence;
-            	break;
-            }
+        case LED_OUTPUT_RGFLASH: {
+            LedNameType *pSequence = malloc(sizeof(LedNameType) * 2);
+            pSequence[0] = RED;
+            pSequence[1] = GREEN;
+            OutputManager_pBlinkLed = (BlinkSequenceType) {.u8SequenceLength = 2, .u32SwitchingTime = 150, .pSequence = pSequence, .u8Repetitions = CONTINUOUS_SEQUENCE};
+            OutputManager_pfStateMachine = OutputManagerSM_LedSequence;
+            break;
+        }
         default:
             //DebugPrintf("No Output State!");
             exit(1);
     }
 }
 
-void OutputManagerSetAlert(LedOutputAlertType ledAlert)
-{
-		if(ledAlert != LED_ALERT_NONE && OutputManager_pfPreAction == NULL)
-		{
-			OutputManager_pfPreAction = OutputManagerPA_LedAlert;
-    holdState(FALSE);
-    LedNameType* sequence;
-    switch(ledAlert)
-    {
-        case LED_ALERT_NONE:
-            holdState(TRUE);
-            break;
-        case LED_ALERT_ORANGE:
-            sequence = malloc(sizeof(LedNameType)*1);
-            *sequence = ORANGE;
-            OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 1, .u32SwitchingTime = ALERT_DURATION};
-            break;
-        case LED_ALERT_REDFLASH:
-						sequence = malloc(sizeof(LedNameType)*2);
-            sequence[0] = RED;
-						sequence[1] = 100;
-            OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 2, .u32SwitchingTime = ALERT_DURATION/6/2, .u8Repetitions = 6};
-            break;
-        case LED_ALERT_ORANGEFLASH:
-sequence = malloc(sizeof(LedNameType)*2);
-            sequence[0] = ORANGE;
-						sequence[1] = 100;
-            OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 2, .u32SwitchingTime = ALERT_DURATION/6/2, .u8Repetitions = 6};
-            break;
-        default:
-            DebugPrintf("Invalid Alert!\n");
+void OutputManagerSetAlert(LedOutputAlertType ledAlert, bool hold) {
+    if (ledAlert != LED_ALERT_NONE && OutputManager_pfPreAction == NULL) {
+        OutputManager_pfPreAction = OutputManagerPA_LedAlert;
+        if(hold == TRUE)
+        {
+            holdState(FALSE);
+        }
+        LedNameType *sequence;
+        switch (ledAlert) {
+            case LED_ALERT_ORANGE:
+                sequence = malloc(sizeof(LedNameType) * 1);
+                *sequence = ORANGE;
+                OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 1, .u32SwitchingTime = ALERT_DURATION};
+                break;
+            case LED_ALERT_REDFLASH:
+                sequence = malloc(sizeof(LedNameType) * 2);
+                sequence[0] = RED;
+                sequence[1] = 100;
+                OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 2, .u32SwitchingTime =
+                ALERT_DURATION / 6 / 2, .u8Repetitions = 6};
+                break;
+            case LED_ALERT_ORANGEFLASH:
+                sequence = malloc(sizeof(LedNameType) * 2);
+                sequence[0] = ORANGE;
+                sequence[1] = 100;
+                OutputManager_pBlinkLed = (BlinkSequenceType) {.pSequence = sequence, .u8SequenceLength = 2, .u32SwitchingTime =
+                ALERT_DURATION / 6 / 2, .u8Repetitions = 6};
+                break;
+            default:
+                DebugPrintf("Invalid Alert!\n");
+        }
     }
-		}
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
-/*! @protectedsection */                                                                                            
+/*! @protectedsection */
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 /*!--------------------------------------------------------------------------------------------------------------------
@@ -151,24 +146,20 @@ Promises:
 - NONE
 
 */
-void OutputManagerInitialize(void)
-{
-  /* If good initialization, set state to Idle */
-  if( 1 )
-  {
-    OutputManager_pfStateMachine = OutputManagerSM_Idle;
-    OutputManager_pBlinkLed = (BlinkSequenceType) {0};
-    DebugPrintf("OutputManager Initialized\n");
-  }
-  else
-  {
-    /* The task isn't properly initialized, so shut it down and don't run */
-    OutputManager_pfStateMachine = OutputManagerSM_Error;
-  }
+void OutputManagerInitialize(void) {
+    /* If good initialization, set state to Idle */
+    if (1) {
+        OutputManager_pfStateMachine = OutputManagerSM_Idle;
+        OutputManager_pBlinkLed = (BlinkSequenceType) {0};
+        DebugPrintf("OutputManager Initialized\n");
+    } else {
+        /* The task isn't properly initialized, so shut it down and don't run */
+        OutputManager_pfStateMachine = OutputManagerSM_Error;
+    }
 
 } /* end OutputManagerInitialize() */
 
-  
+
 /*!----------------------------------------------------------------------------------------------------------------------
 @fn void OutputManagerRunActiveState(void)
 
@@ -184,60 +175,113 @@ Promises:
 - Calls the function to pointed by the state machine function pointer
 
 */
-void OutputManagerRunActiveState(void)
-{
-	if(OutputManager_pfPreAction != NULL)
-	{
-		OutputManager_pfPreAction();
-	}
-  OutputManager_pfStateMachine();
+void OutputManagerRunActiveState(void) {
+    if (OutputManager_pfPreAction != NULL) {
+        OutputManager_pfPreAction();
+    }
+    OutputManager_pfStateMachine();
 } /* end OutputManagerRunActiveState */
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
-/*! @privatesection */                                                                                            
+/*! @privatesection */
 /*--------------------------------------------------------------------------------------------------------------------*/
 
-static void clearLeds(void)
-{
-		int i = 0;
-    for(LedNameType eLed = WHITE; eLed <= RED; LedOff(eLed++));
+static void clearLeds(void) {
+    int i = 0;
+    for (LedNameType eLed = WHITE; eLed <= RED; LedOff(eLed++));
 }
 
-static void deleteSequence(void)
-{
-	if(OutputManager_pBlinkLed.pSequence != NULL)
-	{
-		DebugPrintf("Led Sequence Does Not Exist!\n");
-		return;
-	}
-	free(OutputManager_pBlinkLed.pSequence);
-	OutputManager_pBlinkLed.pSequence = NULL;
+static void deleteSequence(void) {
+    if (OutputManager_pBlinkLed.pSequence != NULL) {
+        DebugPrintf("Led Sequence Does Not Exist!\n");
+        return;
+    }
+    free(OutputManager_pBlinkLed.pSequence);
+    OutputManager_pBlinkLed.pSequence = NULL;
 }
 
-static bool holdState(bool resume)
-{
+static bool holdState(bool resume) {
     static fnCode_type heldState = OutputManagerSM_Idle;
     static BlinkSequenceType heldSequence;
-		static LedNameType prev_led;
-    if(resume == TRUE)
-    {
-        if(heldState != OutputManager_pfStateMachine || heldState == OutputManagerSM_Idle)
-        {
-						if((LedNameType)heldSequence.pSequence >= WHITE && (LedNameType)heldSequence.pSequence <= RED)
-						{
-							LedOn((LedNameType)heldSequence.pSequence);
-						}
+    static LedNameType prev_led;
+    clearLeds();
+    if (resume == TRUE) {
+        if (heldState != OutputManager_pfStateMachine || heldState == OutputManagerSM_Idle) {
+            if ((LedNameType) heldSequence.pSequence >= WHITE && (LedNameType) heldSequence.pSequence <= RED) {
+                LedOn((LedNameType) heldSequence.pSequence);
+            }
             OutputManager_pfStateMachine = heldState;
             deleteSequence();
             OutputManager_pBlinkLed = heldSequence;
+            OutputManager_pBlinkLed.bInitialized = FALSE;
         }
-    }
-    else
-    {
+    } else {
         heldState = OutputManager_pfStateMachine;
         heldSequence = OutputManager_pBlinkLed;
         OutputManager_pfStateMachine = OutputManagerSM_Hold;
+    }
+}
+
+static void alertSound() {
+
+}
+
+static short sequenceTracker(bool bIncrement) {
+    static u32 u32SequenceTimer;
+    static short s8SequenceCursor;
+
+    //detect new sequence
+    if (OutputManager_pBlinkLed.bInitialized == FALSE) {
+        u32SequenceTimer = G_u32SystemTime1ms;
+        s8SequenceCursor = 0;
+
+//        clearLeds();
+//        LedOn(OutputManager_pBlinkLed.pSequence[s8SequenceCursor]);
+        OutputManager_pBlinkLed.bInitialized = TRUE;
+    }
+
+    //run sequence
+    if (G_u32SystemTime1ms - u32SequenceTimer >= OutputManager_pBlinkLed.u32SwitchingTime) {
+//        if(OutputManager_pBlinkLed.pSequence[s8SequenceCursor] != 100)
+//        {
+//            LedOff(OutputManager_pBlinkLed.pSequence[s8SequenceCursor++]);
+//        }
+//        else
+//        {
+//            s8SequenceCursor++;
+//        }
+        //check for end of sequence
+        if (bIncrement == TRUE) {
+            s8SequenceCursor++;
+            if (s8SequenceCursor == OutputManager_pBlinkLed.u8SequenceLength) {
+                //check for end of repetitions
+                if (OutputManager_pBlinkLed.u8Repetitions == 0) {
+                    OutputManagerSwitchOutputState(LED_OUTPUT_NONE);
+                    return -2;
+                } else if (OutputManager_pBlinkLed.u8Repetitions != CONTINUOUS_SEQUENCE) {
+                    OutputManager_pBlinkLed.u8Repetitions--;
+                }
+
+                s8SequenceCursor = 0;
+            }
+        }
+        u32SequenceTimer = G_u32SystemTime1ms;
+        return s8SequenceCursor;
+    }
+    return -1;
+}
+
+static void OutputManagerPA_LedAlert(void) {
+    //stop state interfering with led alert pattern
+    if (OutputManager_pfStateMachine != OutputManagerSM_Hold) {
+        //holds current state
+        holdState(FALSE);
+    }
+    OutputManagerSM_LedSequence();
+    if (OutputManager_pfStateMachine == OutputManagerSM_Idle) {
+        holdState(TRUE);
+        OutputManager_pfPreAction = NULL;
     }
 }
 
@@ -246,83 +290,31 @@ State Machine Function Definitions
 **********************************************************************************************************************/
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* What does this state do? */
-static void OutputManagerSM_Idle(void)
-{
-    
+static void OutputManagerSM_Idle(void) {
+
 } /* end OutputManagerSM_Idle() */
 
- static void OutputManagerSM_LedSequence(void)
- {
-    static u32 u32SequenceTimer;
-    static u8 u8SequenceCursor;
+static void OutputManagerSM_LedSequence(void) {
+    static short i;
 
-    //detect new sequence
-    if(OutputManager_pBlinkLed.bInitialized == FALSE)
-    {
-        u32SequenceTimer = G_u32SystemTime1ms;
-				u8SequenceCursor = 0;
-				
-        clearLeds();
-        LedOn(OutputManager_pBlinkLed.pSequence[u8SequenceCursor]);
-        OutputManager_pBlinkLed.bInitialized = TRUE;
-    }
+    short temp = sequenceTracker(TRUE);
 
-    //run sequence
-    if(G_u32SystemTime1ms - u32SequenceTimer >= OutputManager_pBlinkLed.u32SwitchingTime)
-    {
-				if(OutputManager_pBlinkLed.pSequence[u8SequenceCursor] != 100)
-				{
-        LedOff(OutputManager_pBlinkLed.pSequence[u8SequenceCursor++]);
-				}
-				else
-				{
-					u8SequenceCursor++;
-				}
-        //check for end of sequence
-        if(u8SequenceCursor == OutputManager_pBlinkLed.u8SequenceLength)
-        {
-            //check for end of repetitions
-            if(OutputManager_pBlinkLed.u8Repetitions == 0)
-            {
-                OutputManagerSwitchOutputState(LED_OUTPUT_NONE);
-                return;
-            }
-            else if(OutputManager_pBlinkLed.u8Repetitions != CONTINUOUS_SEQUENCE)
-            {
-                OutputManager_pBlinkLed.u8Repetitions--;
-            }
-
-            u8SequenceCursor = 0;
+    if (temp >= WHITE && temp <= RED) {
+        if (i >= WHITE && i <= RED) {
+            LedOff(OutputManager_pBlinkLed.pSequence[i]);
         }
-				if(OutputManager_pBlinkLed.pSequence[u8SequenceCursor] != 100)
-				{
-        LedOn(OutputManager_pBlinkLed.pSequence[u8SequenceCursor]);
-				}
-        u32SequenceTimer = G_u32SystemTime1ms;
+        i = temp;
+        LedOn(OutputManager_pBlinkLed.pSequence[i]);
     }
- }
-
-static void OutputManagerPA_LedAlert(void)
-{
-     //stop state interfering with led alert pattern
-     if(OutputManager_pfStateMachine != OutputManagerSM_Hold)
-     {
-         //holds current state
-         holdState(FALSE);
-     }
-     OutputManagerSM_LedSequence();
-     if(OutputManager_pfStateMachine == OutputManagerSM_Idle)
-     {
-        holdState(TRUE);
-				OutputManager_pfPreAction = NULL;
-     }
+    if (i == 100) {
+        i = 0;
+    }
 }
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
-static void OutputManagerSM_Error(void)          
-{
-  
+static void OutputManagerSM_Error(void) {
+
 } /* end OutputManagerSM_Error() */
 
 

@@ -79,7 +79,7 @@ Promises:
 void PasswordLockInitialize(void)
 {
 	/* If good initialization, set state to Idle */
-	if( 0 )
+	if( 1 )
 	{
 		PasswordLock_pfStateMachine = PasswordLockSM_Idle;
 		DebugPrintf("PasswordLock Initialized\n");
@@ -186,14 +186,6 @@ short checkPassword(ButtonInputBufferType* input, const ButtonInputBufferType* p
 	return 0;
 }
 
-/*!
-@fn void clearLeds(void)
-*/
-static void clearLeds(void)
-{
-	for(LedNameType led = WHITE; led <= RED; LedOff(led++));
-}
-
 /**********************************************************************************************************************
 State Machine Function Definitions
 **********************************************************************************************************************/
@@ -230,7 +222,8 @@ static void PasswordLockSM_Idle(void)
 			//Initaialize for Change State
 			pCurrentPasswordState = PASSWORD_CHANGE;
 			u32TimeStamp = G_u32SystemTime1ms;
-			LedOn(ORANGE);
+			OutputManagerSwitchOutputState(LED_OUTPUT_RGFLASH);
+			OutputManagerSetAlert(LED_ALERT_ORANGE, TRUE);
 		}
 		else
 		{
@@ -253,6 +246,7 @@ static void PasswordLockSM_Idle(void)
 		{
 			pButtonInputBuffer.u8Size = 0;
 			bInputOverfill = TRUE;
+			OutputManagerSetAlert(LED_ALERT_ORANGEFLASH, TRUE);
 			PWMAudioOn(BUZZER1);
 			u32TimeStamp = G_u32SystemTime1ms;
 		}
@@ -260,17 +254,6 @@ static void PasswordLockSM_Idle(void)
 	
 	if(pCurrentPasswordState == PASSWORD_CHANGE)
 	{
-		//Begin alternating green and red leds
-		if(bStateInit == TRUE && G_u32SystemTime1ms - u32TimeStamp == 1500)
-		{
-			LedOff(ORANGE);
-			LedBlink(GREEN, LED_2HZ);
-		}
-		if(bStateInit && G_u32SystemTime1ms - u32TimeStamp == 1750)
-		{
-			LedBlink(RED, LED_2HZ);
-			bStateInit = FALSE;
-		}
 		
 		if(waitingForBtn(BUTTON3))
 		{
@@ -278,6 +261,7 @@ static void PasswordLockSM_Idle(void)
 			{
 				bInputOverfill = TRUE;
 				PWMAudioOn(BUZZER1);
+				OutputManagerSetAlert(LED_ALERT_ORANGEFLASH, TRUE);
 				u32TimeStamp = G_u32SystemTime1ms;
 			}
 			else
@@ -290,7 +274,6 @@ static void PasswordLockSM_Idle(void)
 			pButtonInputBuffer.u8Size = 0;
 			bStateInit = TRUE;
 			pCurrentPasswordState = PASSWORD_LOCKED;
-			clearLeds();
 			}
 			
 		}
@@ -300,14 +283,18 @@ static void PasswordLockSM_Idle(void)
 	{
 		if(bStateInit == TRUE)
 		{
-			LedOn(RED);
+			OutputManagerSwitchOutputState(LED_OUTPUT_RED);
 			bStateInit = FALSE;
 		}
-		if(checkPassword(&pButtonInputBuffer, &pButtonPassword) == 1){
+		short u8PassCheck = checkPassword(&pButtonInputBuffer, &pButtonPassword);
+		if(u8PassCheck == 1){
 			bStateInit = TRUE;
 			pCurrentPasswordState = PASSWORD_UNLOCKED;
-			clearLeds();
 		}
+		else if(u8PassCheck == -1)
+    {
+		  OutputManagerSetAlert(LED_ALERT_REDFLASH, TRUE);
+    }
 	}
 	
 	if(pCurrentPasswordState == PASSWORD_UNLOCKED)
@@ -315,12 +302,11 @@ static void PasswordLockSM_Idle(void)
 		if(bStateInit == TRUE)
 		{
 			bStateInit = FALSE;
-			LedOn(GREEN);
+			OutputManagerSwitchOutputState(LED_OUTPUT_GREEN);
 		}
 		if(waitingForBtn(BUTTON3))
 		{
 			pButtonInputBuffer.u8Size = 0;
-			clearLeds();
 			bStateInit = TRUE;
 			pCurrentPasswordState = PASSWORD_LOCKED;
 		}
@@ -340,7 +326,7 @@ static void PasswordLockSM_Error(void)
 	}
 	if(G_u32SystemTime1ms == 4000)
     {
-	    OutputManagerSetAlert(LED_ALERT_ORANGE);
+	    OutputManagerSetAlert(LED_ALERT_ORANGE,TRUE);
     }
 	if(G_u32SystemTime1ms == 6000)
     {
@@ -348,7 +334,7 @@ static void PasswordLockSM_Error(void)
     }
 	if(G_u32SystemTime1ms == 8000)
     {
-	    OutputManagerSetAlert(LED_ALERT_REDFLASH);
+	    OutputManagerSetAlert(LED_ALERT_REDFLASH,TRUE);
     }
 } /* end PasswordLockSM_Error() */
 

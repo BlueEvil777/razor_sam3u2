@@ -52,7 +52,7 @@ Function Declarations
   * @fn void OutputManagerSetAlert(LedOutputAlertType ledAlert)
   * @param ledAlert
   */
-void OutputManagerSetAlert(LedOutputAlertType ledAlert);
+void OutputManagerSetAlert(LedOutputAlertType ledAlert, bool hold);
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @protectedsection */                                                                                            
@@ -69,6 +69,8 @@ void OutputManagerRunActiveState(void);
 static void clearLeds(void);
 static void deleteSequence(void);
 static bool holdState(bool resume);
+static void alertSound(void);
+static short sequenceTracker(bool);
 
 /***********************************************************************************************************************
 State Machine Declarations
