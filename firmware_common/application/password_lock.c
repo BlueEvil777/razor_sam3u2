@@ -39,6 +39,7 @@ extern volatile u32 G_u32SystemTime1ms;                   /*!< @brief From main.
 extern volatile u32 G_u32SystemTime1s;                    /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;                     /*!< @brief From main.c */
 extern volatile u32 G_u32ApplicationFlags;                /*!< @brief From main.c */
+extern volatile bool G_bApplicationNotReady;
 
 
 /***********************************************************************************************************************
@@ -110,7 +111,9 @@ Promises:
 */
 void PasswordLockRunActiveState(void)
 {
-	PasswordLock_pfStateMachine();
+    if(G_bApplicationNotReady == FALSE) {
+        PasswordLock_pfStateMachine();
+    }
 	
 } /* end PasswordLockRunActiveState */
 

@@ -16,6 +16,7 @@ volatile u32 G_u32SystemTime1ms = 0;     /*!< @brief Global system time incremen
 volatile u32 G_u32SystemTime1s  = 0;     /*!< @brief Global system time incremented every second, max 2^32 (~136 years) */
 volatile u32 G_u32SystemFlags   = 0;     /*!< @brief Global system flags */
 volatile u32 G_u32ApplicationFlags = 0;  /*!< @brief Global system application flags: set when application is successfully initialized */
+volatile bool G_bApplicationNotReady = FALSE;
 
 /* Task short names corresponding to G_u32ApplicationFlags in main.h */
 #ifdef EIE_ASCII

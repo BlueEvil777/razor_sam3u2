@@ -40,6 +40,7 @@ extern volatile u32 G_u32SystemTime1ms;                   /*!< @brief From main.
 extern volatile u32 G_u32SystemTime1s;                    /*!< @brief From main.c */
 extern volatile u32 G_u32SystemFlags;                     /*!< @brief From main.c */
 extern volatile u32 G_u32ApplicationFlags;                /*!< @brief From main.c */
+extern volatile bool G_bApplicationNotReady;
 
 
 /***********************************************************************************************************************
@@ -179,7 +180,9 @@ void OutputManagerRunActiveState(void) {
     if (OutputManager_pfPreAction != NULL) {
         OutputManager_pfPreAction();
     }
-    OutputManager_pfStateMachine();
+    if(G_bApplicationNotReady == FALSE) {
+        OutputManager_pfStateMachine();
+    }
 } /* end OutputManagerRunActiveState */
 
 
@@ -215,8 +218,10 @@ static bool holdState(bool resume) {
             deleteSequence();
             OutputManager_pBlinkLed = heldSequence;
             OutputManager_pBlinkLed.bInitialized = FALSE;
+            G_bApplicationNotReady = FALSE;
         }
     } else {
+        G_bApplicationNotReady = TRUE;
         heldState = OutputManager_pfStateMachine;
         heldSequence = OutputManager_pBlinkLed;
         OutputManager_pfStateMachine = OutputManagerSM_Hold;
@@ -225,6 +230,21 @@ static bool holdState(bool resume) {
 
 static void alertSound() {
 
+    static short i;
+
+    short temp = sequenceTracker(TRUE);
+
+    if (temp >= WHITE && temp <= RED) {
+        if (i >= WHITE && i <= RED) {
+            PWMAudioOff(BUZZER1);
+        }
+        i = temp;
+        PWMAudioSetFrequency(BUZZER1, (u16) (RED-OutputManager_pBlinkLed.pSequence[i]+1) * 10);
+
+    }
+    if (i == -2) {
+        i = 0;
+    }
 }
 
 static short sequenceTracker(bool bIncrement) {
@@ -279,6 +299,7 @@ static void OutputManagerPA_LedAlert(void) {
         holdState(FALSE);
     }
     OutputManagerSM_LedSequence();
+    alertSound();
     if (OutputManager_pfStateMachine == OutputManagerSM_Idle) {
         holdState(TRUE);
         OutputManager_pfPreAction = NULL;
@@ -306,7 +327,7 @@ static void OutputManagerSM_LedSequence(void) {
         i = temp;
         LedOn(OutputManager_pBlinkLed.pSequence[i]);
     }
-    if (i == 100) {
+    if (i == -2) {
         i = 0;
     }
 }
