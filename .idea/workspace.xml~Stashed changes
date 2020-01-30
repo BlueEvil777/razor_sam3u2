@@ -2,17 +2,19 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="Rasor_Sam3u2" targetName="Rasor_Sam3u2" />
+      <config projectName="Project" targetName="sam" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c1aa1ff-d670-4225-894f-088473f6ff1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.Debug.general.xcl" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.Debug.general.xcl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firmware_common/application/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dbgdt" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dbgdt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dnx" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dnx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.wsdt" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.wsdt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firmware_common/application/user_app1.c" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_common/application/user_app1.c" afterDir="false" />
@@ -25,6 +27,14 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +59,7 @@
     <property name="settings.editor.selected.configurable" value="CLionExternalConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration name="Rasor_Sam3u2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Rasor_Sam3u2" TARGET_NAME="Rasor_Sam3u2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Rasor_Sam3u2" RUN_TARGET_NAME="Rasor_Sam3u2">
+    <configuration name="sam" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sam" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="sam">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -111,8 +121,9 @@
       <workItem from="1580175350393" duration="8000" />
       <workItem from="1580256847966" duration="1507000" />
       <workItem from="1580312828983" duration="1234000" />
-      <workItem from="1580347768826" duration="3678000" />
-      <workItem from="1580355482407" duration="652000" />
+      <workItem from="1580347768826" duration="4060000" />
+      <workItem from="1580354326071" duration="91000" />
+      <workItem from="1580354568461" duration="192000" />
     </task>
     <servers />
   </component>
@@ -133,10 +144,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="741" y="278" key="FileChooserDialogImpl" timestamp="1579879074647">
+    <state x="741" y="278" key="FileChooserDialogImpl" timestamp="1580354406599">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="741" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579879074647" />
+    <state x="741" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580354406599" />
     <state x="770" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580172331562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
