@@ -219,7 +219,7 @@ static void PasswordLockSM_Idle(void)
 	if(pCurrentPasswordState == PASSWORD_NOT_READY && G_u32SystemTime1ms - u32TimeStamp >= 2000)
 	{
 		bStateInit = TRUE;
-		PWMAudioSetFrequency(BUZZER1, 300);
+		//PWMAudioSetFrequency(BUZZER1, 300);
 		if(waitingForBtn(BUTTON3))
 		{
 			//Initaialize for Change State
@@ -240,7 +240,7 @@ static void PasswordLockSM_Idle(void)
 		
 		if(bInputOverfill == TRUE && G_u32SystemTime1ms - u32TimeStamp >= 700)
 		{
-			PWMAudioOff(BUZZER1);
+			//PWMAudioOff(BUZZER1);
 			bInputOverfill = FALSE;
 		}
 		
@@ -250,7 +250,7 @@ static void PasswordLockSM_Idle(void)
 			pButtonInputBuffer.u8Size = 0;
 			bInputOverfill = TRUE;
 			OutputManagerSetAlert(LED_ALERT_ORANGEFLASH, TRUE);
-			PWMAudioOn(BUZZER1);
+			//PWMAudioOn(BUZZER1);
 			u32TimeStamp = G_u32SystemTime1ms;
 		}
 	}
@@ -263,7 +263,7 @@ static void PasswordLockSM_Idle(void)
 			if(pButtonInputBuffer.u8Size == 0)
 			{
 				bInputOverfill = TRUE;
-				PWMAudioOn(BUZZER1);
+				//PWMAudioOn(BUZZER1);
 				OutputManagerSetAlert(LED_ALERT_ORANGEFLASH, TRUE);
 				u32TimeStamp = G_u32SystemTime1ms;
 			}

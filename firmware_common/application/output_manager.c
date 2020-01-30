@@ -232,18 +232,16 @@ static void alertSound() {
 
     static short i;
 
-    short temp = sequenceTracker(TRUE);
+    short temp = sequenceTracker(FALSE);
 
-    if (temp >= WHITE && temp <= RED) {
-        if (i >= WHITE && i <= RED) {
-            PWMAudioOff(BUZZER1);
-        }
+    if (temp >= 0 && temp < 100) {
         i = temp;
-        PWMAudioSetFrequency(BUZZER1, (u16) (RED-OutputManager_pBlinkLed.pSequence[i]+1) * 10);
-
+        PWMAudioSetFrequency(BUZZER1, (u16) (RED-OutputManager_pBlinkLed.pSequence[i]) * 50 + 100);
+        PWMAudioOn(BUZZER1);
     }
     if (i == -2) {
         i = 0;
+        PWMAudioOff(BUZZER1);
     }
 }
 
@@ -278,6 +276,8 @@ static short sequenceTracker(bool bIncrement) {
                 //check for end of repetitions
                 if (OutputManager_pBlinkLed.u8Repetitions == 0) {
                     OutputManagerSwitchOutputState(LED_OUTPUT_NONE);
+                    u32SequenceTimer = G_u32SystemTime1ms;
+                    s8SequenceCursor = -2;
                     return -2;
                 } else if (OutputManager_pBlinkLed.u8Repetitions != CONTINUOUS_SEQUENCE) {
                     OutputManager_pBlinkLed.u8Repetitions--;
@@ -287,6 +287,10 @@ static short sequenceTracker(bool bIncrement) {
             }
         }
         u32SequenceTimer = G_u32SystemTime1ms;
+        return s8SequenceCursor;
+    }
+    if(bIncrement == FALSE && G_u32SystemTime1ms - u32SequenceTimer == 0)
+    {
         return s8SequenceCursor;
     }
     return -1;
