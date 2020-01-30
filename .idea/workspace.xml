@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Rasor_Sam3u2" targetName="Rasor_Sam3u2" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c1aa1ff-d670-4225-894f-088473f6ff1a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dbgdt" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dbgdt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dnx" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.dnx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.wsdt" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_ascii/iar_8_10_1/settings/eie_ascii-01.wsdt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware_common/application/output_manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_common/application/output_manager.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firmware_common/application/password_lock.c" beforeDir="false" afterPath="$PROJECT_DIR$/firmware_common/application/password_lock.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\TEMP\Documents\EIE\Rasor_Sam3u2\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1UDJuhlS0nMLcjKYIE6bW64dd6F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../School/2019-2020/ENEL 343 Splice/nonIdealVSrc.cir" />
+    <property name="settings.editor.selected.configurable" value="CLionExternalConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Rasor_Sam3u2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Rasor_Sam3u2" TARGET_NAME="Rasor_Sam3u2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Rasor_Sam3u2" RUN_TARGET_NAME="Rasor_Sam3u2">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c1aa1ff-d670-4225-894f-088473f6ff1a" name="Default Changelist" comment="" />
+      <created>1574885456798</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574885456798</updated>
+      <workItem from="1574885460142" duration="3476000" />
+      <workItem from="1574890515562" duration="26000" />
+      <workItem from="1574891735795" duration="19000" />
+      <workItem from="1574903561427" duration="3732000" />
+      <workItem from="1574908546728" duration="2303000" />
+      <workItem from="1574911428405" duration="1169000" />
+      <workItem from="1575427773558" duration="1060000" />
+      <workItem from="1575488744949" duration="593000" />
+      <workItem from="1575665048609" duration="20000" />
+      <workItem from="1578516008413" duration="159000" />
+      <workItem from="1578516330164" duration="1145000" />
+      <workItem from="1578519047085" duration="293000" />
+      <workItem from="1578519886550" duration="101000" />
+      <workItem from="1578520158476" duration="2677000" />
+      <workItem from="1578526097640" duration="2369000" />
+      <workItem from="1579017105142" duration="1843000" />
+      <workItem from="1579663154762" duration="1979000" />
+      <workItem from="1579742771912" duration="2249000" />
+      <workItem from="1579745190410" duration="1177000" />
+      <workItem from="1579754893355" duration="427000" />
+      <workItem from="1579755472995" duration="179000" />
+      <workItem from="1579879016067" duration="66000" />
+      <workItem from="1579911924070" duration="1245000" />
+      <workItem from="1580153373087" duration="1315000" />
+      <workItem from="1580155039855" duration="495000" />
+      <workItem from="1580155688419" duration="148000" />
+      <workItem from="1580163460667" duration="848000" />
+      <workItem from="1580170812008" duration="4007000" />
+      <workItem from="1580175075779" duration="60000" />
+      <workItem from="1580175173428" duration="24000" />
+      <workItem from="1580175241624" duration="22000" />
+      <workItem from="1580175350393" duration="8000" />
+      <workItem from="1580256847966" duration="1507000" />
+      <workItem from="1580312828983" duration="1234000" />
+      <workItem from="1580347768826" duration="3678000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="741" y="278" key="FileChooserDialogImpl" timestamp="1579879074647">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="741" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579879074647" />
+    <state x="770" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580172331562">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="770" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1578519069163" />
+    <state x="770" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1580172331562" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/firmware_common/application/output_manager.c</url>
+          <line>218</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
